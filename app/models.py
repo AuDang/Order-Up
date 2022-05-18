@@ -7,19 +7,24 @@ db = SQLAlchemy()
 
 class Employee(db.Model, UserMixin):
    __tablename__ = 'employees'
+   # __init__(self)
 
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(100), nullable=False)
    employee_number = db.Column(db.Integer, nullable=False, unique=True)
-   hashed_password = db.Column(db.String(255), nullable=False)
+   hashed_password = db.Column(db.String(255) )
+   password = db.Column(db.String(255), nullable=False)
+   # check_password = db.Column(db.String)
+
 
 @property
 def password(self):
-   return self.hashed_password
+    return self.hashed_password
 
 @password.setter
 def password(self, password):
-   self.hashed_password = generate_password_hash(password)
+    self.hashed_password = generate_password_hash(password)
 
+@property
 def check_password(self, password):
-   return check_password_hash(self.password, password)
+    return check_password_hash(self.password, password)

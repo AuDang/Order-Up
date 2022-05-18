@@ -12,7 +12,7 @@ app.register_blueprint(session.bp)
 db.init_app(app)
 
 login= LoginManager(app)
-login.loggin_view = "session.login"
+login.login_view = 'session.login'
 
 @login.user_loader
 def load_user(id):
