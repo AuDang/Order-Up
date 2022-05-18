@@ -12,19 +12,20 @@ class Employee(db.Model, UserMixin):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(100), nullable=False)
    employee_number = db.Column(db.Integer, nullable=False, unique=True)
-   hashed_password = db.Column(db.String(255) )
-   password = db.Column(db.String(255), nullable=False)
-   # check_password = db.Column(db.String)
+   hashed_password = db.Column(db.String(255), nullable=False)
 
 
-@property
-def password(self):
-    return self.hashed_password
 
-@password.setter
-def password(self, password):
-    self.hashed_password = generate_password_hash(password)
+   @property
+   def password(self):
+      return self.hashed_password
 
-@property
-def check_password(self, password):
-    return check_password_hash(self.password, password)
+   @password.setter
+   def password(self, password):
+      self.hashed_password = generate_password_hash(password)
+
+   # @property
+   def check_password(self, password):
+      # print('hello', password, self.password)
+      return check_password_hash(self.password, password)
+
